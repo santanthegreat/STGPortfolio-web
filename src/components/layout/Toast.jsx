@@ -1,5 +1,5 @@
 // ── components/Toast.jsx ─────────────────────────────────────────────────
-import { useStore } from '../hooks/useStore'
+import { useStore } from '../../hooks/useStore'
 
 export default function Toast() {
   const { state } = useStore()

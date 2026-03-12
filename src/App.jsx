@@ -1,18 +1,21 @@
-// ── App.jsx ──────────────────────────────────────────────────────────────
 import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { StoreProvider, useStore } from './hooks/useStore'
 import { sbLoadConfig, sbLoadSlots, parseSlotRow } from './lib/supabase'
-import Nav from './components/Nav'
-import WorksPage from "./pages/WorksPage"
-import PostersPage from "./pages/PostersPage"
-import AdminModal from './components/AdminModal'
-import PasswordOverlay from './components/PasswordOverlay'
-import SpiderWeb from './components/SpiderWeb'
-import Toast from './components/Toast'
+
+import Nav from './components/layout/Nav'
+import SpiderWeb from './components/layout/SpiderWeb'
+import Toast from './components/layout/Toast'
+import PasswordOverlay from './components/modals/PasswordOverlay'
+import AdminModal from './components/modals/AdminModal'
+import VideoViewer from './components/works/VideoViewer'
+
+import WorksPage from './pages/WorksPage'
+import PostersPage from './pages/PostersPage'
 
 function AppInner() {
   const { state, dispatch } = useStore()
-  const { page, activeModal, loading } = state
+  const { activeModal, loading } = state
 
   // Load data from Supabase on mount
   useEffect(() => {
@@ -37,7 +40,8 @@ function AppInner() {
         const slots = {}
         for (let i = 1; i <= slotCount; i++) {
           slots[i] = {
-            url: null, link: '', name: 'Project Name', client: 'Client',
+            url: null, embedUrl: null, platform: 'unknown', previewUrl: null,
+            link: '', name: 'Project Name', client: 'Client',
             credits: [], trimStart: 0, trimEnd: null, frames: [], frameTypes: {},
           }
         }
@@ -64,38 +68,38 @@ function AppInner() {
 
   return (
     <div className="app">
-      {/* Background */}
       <div className="grain" />
       <SpiderWeb />
 
       {/* Loading screen */}
-      {loading && (
-        <div id="loading-screen" className="show">
-          <div className="ls-logo">STG Studio</div>
-          <div className="ls-sub">Loading...</div>
-        </div>
-      )}
+     {loading && (
+  <div className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center gap-4">
+    <div className="text-[1.4rem] font-bold tracking-[.12em] uppercase text-gradient-logo">
+      STG Studio
+    </div>
+    <div className="text-[0.52rem] tracking-[.28em] uppercase text-cream/28">
+      Loading...
+    </div>
+  </div>
+)}
 
-      {/* Password overlay — shown when accessing admin */}
+      {/* Password overlay */}
       {activeModal === 'password' && <PasswordOverlay />}
 
       {/* Nav — always visible */}
       {!loading && <Nav />}
 
-      {/* Pages */}
+      {/* Routes */}
       {!loading && (
-        <>
-          <div style={{ display: page === 'works' ? 'block' : 'none' }}>
-            < WorksPage/>
-          </div>
-          <div style={{ display: page === 'posters' ? 'block' : 'none' }}>
-            <PostersPage />
-          </div>
-        </>
+        <Routes>
+          <Route path="/" element={<WorksPage />} />
+          <Route path="/posters" element={<PostersPage />} />
+        </Routes>
       )}
 
-      {/* Admin modal (trim/credits editor) */}
+      {/* Modals */}
       {activeModal && activeModal !== 'password' && <AdminModal />}
+      <VideoViewer />
 
       {/* Toast */}
       <Toast />
@@ -106,7 +110,10 @@ function AppInner() {
 export default function App() {
   return (
     <StoreProvider>
-      <AppInner />
+      <BrowserRouter>
+        <AppInner />
+      </BrowserRouter>
     </StoreProvider>
   )
 }
+
