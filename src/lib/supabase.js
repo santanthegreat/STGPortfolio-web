@@ -30,9 +30,9 @@ export function detectPlatform(url) {
 export function extractVideoId(url) {
   if (!url) return null
 
-  // YouTube: youtube.com/watch?v=ID or youtu.be/ID
+ // YouTube: watch?v=, embed/, youtu.be/, and shorts/
   const ytMatch = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
   )
   if (ytMatch) return ytMatch[1]
 

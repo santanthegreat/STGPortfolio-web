@@ -63,11 +63,11 @@ export default function VideoViewer() {
 
      {/* Info */}
 <div className="mt-5 text-center flex flex-col gap-1" onClick={(e) => e.stopPropagation()}>
-  <span className="font-['Bebas_Neue'] text-[2rem] tracking-[.12em] text-white
+  <span className="font-['Archivo'] text-[2rem] tracking-[.12em] text-white
     drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
     {slot.name}
   </span>
-  <span className="font-['Barlow_Condensed'] text-[1rem] tracking-[.28em] uppercase
+  <span className="font-['Archivo'] text-[1rem] tracking-[.28em] uppercase
     text-white font-bold drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
     {slot.client}
   </span>
@@ -75,7 +75,7 @@ export default function VideoViewer() {
   {slot.credits?.length > 0 && (
     <div className="mt-2.5 flex flex-wrap justify-center gap-x-5 gap-y-1.5">
       {slot.credits.map((c, i) => (
-        <span key={i} className="font-['Barlow_Condensed'] text-[1rem] tracking-[.16em] uppercase
+        <span key={i} className="font-['Archivo'] text-[1rem] tracking-[.16em] uppercase
           text-white drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
           <span className="text-white/80">{c.role} </span>{c.name}
         </span>
@@ -88,7 +88,7 @@ export default function VideoViewer() {
       target="_blank"
       rel="noreferrer"
       onClick={(e) => e.stopPropagation()}
-      className="mt-2 font-['Barlow_Condensed'] text-[0.58rem] tracking-[.2em]
+      className="mt-2 font-['Archivo'] text-[0.58rem] tracking-[.2em]
         uppercase text-white/45 no-underline hover:text-white/70 transition-colors"
     >
       ↗ Watch Full
