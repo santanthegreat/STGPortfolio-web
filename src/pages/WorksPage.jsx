@@ -62,7 +62,7 @@ export default function WorksPage() {
       <footer className="border-t border-cream/[0.08] px-7 pt-[52px] pb-11 grid grid-cols-2 gap-10 items-end max-[420px]:grid-cols-1">
         <div className="flex flex-col gap-1.5">
           <a href="mailto:santanthegreat@gmail.com" className="text-[0.8rem] text-cream/55 no-underline">
-            santanthegreat@gmail.com
+            ebikhumisamuel@gmail.com
           </a>
           <a href="tel:+2348115061690" className="text-[0.8rem] text-cream/55 no-underline">
             +234 811 506 1690
